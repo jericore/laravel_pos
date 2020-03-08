@@ -43,10 +43,11 @@ class CategoryController extends Controller
 
         try {
           $categories = Category::FirstOrCreate([
-            'name'        => $request->name
+            'name'        => $request->name  //-> ini untuk validasi kalo misal namanya udah ada berarti cuman nge select doang kalo ga ada dia langsung nge crea
           ], [
             'description' => $request->description
           ]);
+          var_dump($categories);die();
           return redirect()->back()->with(['success' => 'Kategori: ' .$categories->name. ' Ditambahkan']);
         } catch (\Exception $e) {
           return redirect()->back()->with(['error' => $e->getMessage()]);
